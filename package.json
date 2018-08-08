@@ -1,0 +1,38 @@
+{
+  "name": "material-snackbar-supplier",
+  "version": "0.1.1",
+  "description": "A provider for using Material UI Snackbar anywhere form your components",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mojilla/material-snackbar-supplier.git"
+  },
+  "keywords": [
+    "reactjs",
+    "snackbar",
+    "material-ui-next",
+    "material-snackbar"
+  ],
+  "author": "Mojilla <mojtaba.bank@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mojilla/material-snackbar-supplier/issues"
+  },
+  "homepage": "https://github.com/mojilla/material-snackbar-supplier#readme",
+  "peerDependencies": {
+    "@material-ui/core": "^1.4.3",
+    "@material-ui/icons": "^2.0.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^1.4.3",
+    "@material-ui/icons": "^2.0.1",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.2"
+  }
+}
