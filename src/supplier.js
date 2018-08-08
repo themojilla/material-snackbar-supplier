@@ -1,16 +1,14 @@
 import React from 'react';
 
-import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import {withStyles} from '@material-ui/core/styles';
+
 import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ErrorIcon from '@material-ui/icons/Error';
-import InfoIcon from '@material-ui/icons/Info';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import WarningIcon from '@material-ui/icons/Warning';
 import green from '@material-ui/core/colors/green';
 import amber from '@material-ui/core/colors/amber';
 
@@ -47,13 +45,15 @@ const styles = theme => ({
 
 const SnackBarContext = React.createContext();
 
-export const withSupplier = (Component) => {
+export const withSnackBar = (Component) => {
   return class extends React.Component {
     render() {
       return (
-        <ThemeContext.Consumer>
-          {showMessage => <Component { ...this.props } showMessage={showMessage}/>}
-        </ThemeContext.Consumer>
+        <SnackBarContext.Consumer>
+          {({message}) => {
+            return <Component {...this.props} message={message}/>
+          }}
+        </SnackBarContext.Consumer>
       )
     }
   }
@@ -61,13 +61,26 @@ export const withSupplier = (Component) => {
 
 class SnackBarSupplier extends React.Component {
   state = {
-    open: true,
-    message: ''
+    open: false,
+    message: '',
+    variant: ''
   };
 
-  showMessage = (message, action, handleAction) => {
-    this.setState({open: true, message, action, handleAction})
+  static propTypes = {
+    children: PropTypes.node,
+    settings: PropTypes.object,
+    classes: PropTypes.object.isRequired
   };
+
+  handleComingMessage = (message, variant = 'info') => {
+    this.setState({open: true, message, variant})
+  };
+
+  getChildrenContext() {
+    return {
+      message: this.handleComingMessage
+    }
+  }
 
   handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -79,27 +92,15 @@ class SnackBarSupplier extends React.Component {
 
   render() {
     const {
-      children,
       classes,
-      className,
-      message,
-      variant,
-      ...other
+      settings
     } = this.props;
 
-    const {open} = this.state;
-
-    const variantIcon = {
-      success: CheckCircleIcon,
-      warning: WarningIcon,
-      error: ErrorIcon,
-      info: InfoIcon
-    };
-    const Icon = variantIcon[variant];
+    const {open, message, variant} = this.state;
 
     return (
-      <ThemeContext.Provider showMessage={this.showMessage}>
-        {children}
+      <SnackBarContext.Provider value={this.getChildrenContext()}>
+        {this.props.children}
 
         <Snackbar
           anchorOrigin={{
@@ -108,15 +109,15 @@ class SnackBarSupplier extends React.Component {
           }}
           open={open}
           onClose={this.handleClose}
+          {...settings}
         >
           <SnackbarContent
-            className={classNames(classes[variant], className)}
+            className={classes[variant]}
             aria-describedby="message-snackbar"
             message={
-              <span id="message-snackbar" className={classes.message}>
-              <Icon className={classNames(classes.icon, classes.iconVariant)}/>
+              <span className={classes.message}>
                 {message}
-            </span>
+              </span>
             }
             action={[
               <IconButton
@@ -129,10 +130,9 @@ class SnackBarSupplier extends React.Component {
                 <CloseIcon className={classes.icon}/>
               </IconButton>
             ]}
-            {...other}
           />
         </Snackbar>
-      </ThemeContext.Provider>
+      </SnackBarContext.Provider>
     )
   }
 }
