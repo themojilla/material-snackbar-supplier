@@ -2,5 +2,7 @@
 
 ### Installation
 Available as npm package.
-```sh
-npm i
+```bash
+npn install --save-dev material-snackbar-supplier
+
+```

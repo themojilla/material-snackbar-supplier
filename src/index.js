@@ -1,1 +1,1 @@
-export {default as DatePicker} from './supplier';
+export  {default as SnackBarSupplier, withSipplier} from './supplier';

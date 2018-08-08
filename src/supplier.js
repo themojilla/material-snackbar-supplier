@@ -1,10 +1,8 @@
-import React, { Fragment } from 'react';
-
-import PropTypes from 'prop-types';
+import Reactfrom 'react';
 
 import classNames from 'classnames';
 
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -47,26 +45,28 @@ const styles = theme => ({
   }
 });
 
-export default class SnackbarSupplier extends React.Component {
+const SnackBarContext = React.createContext();
+
+export const withSipplier = (Component) => {
+  return class extends React.Component {
+    render() {
+      return (
+        <ThemeContext.Consumer>
+          {showMessage => <Component { ...this.props } showMessage={showMessage}/>}
+        </ThemeContext.Consumer>
+      )
+    }
+  }
+};
+
+class SnackBarSupplier extends React.Component {
   state = {
     open: true,
     message: ''
   };
 
-  static propTypes = {
-    options: PropTypes.object,
-  };
-
-  getChildContext() {
-    return {
-      snackbar: {
-        message: this.showMessage
-      }
-    }
-  }
-
   showMessage = (message, action, handleAction) => {
-    this.setState({ open: true, message, action, handleAction })
+    this.setState({open: true, message, action, handleAction})
   };
 
   handleClose = (event, reason) => {
@@ -74,7 +74,7 @@ export default class SnackbarSupplier extends React.Component {
       return;
     }
 
-    this.setState({ open: false });
+    this.setState({open: false});
   };
 
   render() {
@@ -87,7 +87,7 @@ export default class SnackbarSupplier extends React.Component {
       ...other
     } = this.props;
 
-    const { open } = this.state;
+    const {open} = this.state;
 
     const variantIcon = {
       success: CheckCircleIcon,
@@ -98,7 +98,7 @@ export default class SnackbarSupplier extends React.Component {
     const Icon = variantIcon[variant];
 
     return (
-      <Fragment>
+      <ThemeContext.Provider showMessage={this.showMessage}>
         {children}
 
         <Snackbar
@@ -132,9 +132,9 @@ export default class SnackbarSupplier extends React.Component {
             {...other}
           />
         </Snackbar>
-      </Fragment>
+      </ThemeContext.Provider>
     )
   }
 }
 
-export default withStyles(styles)(SnackbarSupplier);
+export default withStyles(styles)(SnackBarSupplier);
