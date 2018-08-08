@@ -1,4 +1,4 @@
-import Reactfrom 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -47,7 +47,7 @@ const styles = theme => ({
 
 const SnackBarContext = React.createContext();
 
-export const withSipplier = (Component) => {
+export const withSupplier = (Component) => {
   return class extends React.Component {
     render() {
       return (

@@ -1,1 +1,1 @@
-export  {default as SnackBarSupplier, withSipplier} from './supplier';
+export { default as SnackBarSupplier, withSupplier } from './supplier';

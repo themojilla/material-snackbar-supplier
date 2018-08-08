@@ -2,9 +2,9 @@
   "name": "material-snackbar-supplier",
   "version": "0.1.4",
   "description": "A provider for using Material UI Snackbar anywhere form your components",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src -d dist"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,12 @@
     "react": "^16.4.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "@material-ui/core": "^1.4.3",
     "@material-ui/icons": "^2.0.1",
     "classnames": "^2.2.6",
