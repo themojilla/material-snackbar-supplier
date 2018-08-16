@@ -16,9 +16,9 @@ Then use provided HOC anywhere you need handle Snackbar
 ```js
 import { SnackBarSupplier } from 'material-snackbar-supplier';
 
-<SnackbarProvider settings={{ autoHideDuration: 1500 }}>
+<SnackBarSupplier settings={{ autoHideDuration: 1500 }}>
   <App />
-</SnackbarProvider>
+</SnackBarSupplier>
 ```
 
 
