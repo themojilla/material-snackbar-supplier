@@ -11,7 +11,7 @@ npm install --save material-snackbar-supplier
 
 ## Usage
 Wrap your root component with SnackBarSupplier and applying any options based on [Snackbar](https://material-ui.com/api/snackbar/).
-Then use provided HOC anywhere you need handle Snackbar
+Then use provided HOC anywhere you need handle Snackbar.make sure you have installed @material-ui/core and @material-ui/icons
 
 ```js
 import { SnackBarSupplier } from 'material-snackbar-supplier';
