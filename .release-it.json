@@ -1,0 +1,9 @@
+{
+  "src": {
+    "tagName": "v%s"
+  },
+  "pkgFiles": ["package.json"],
+  "requireUpstream": false,
+  "beforeChangelogCommand": "auto-changelog",
+  "safeBump": false
+}
