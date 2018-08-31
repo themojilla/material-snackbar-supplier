@@ -1,6 +1,6 @@
 {
   "name": "material-snackbar-supplier",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "A provider for using Material UI Snackbar anywhere form your components",
   "main": "dist/index.js",
   "module": "src/index.js",
