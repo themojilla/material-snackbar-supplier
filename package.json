@@ -3,7 +3,6 @@
   "version": "0.3.0",
   "description": "A provider for using Material UI Snackbar anywhere form your components",
   "main": "dist/index.js",
-  "module": "src/index.js",
   "scripts": {
     "build": "babel src -d dist",
     "prepublishOnly": "npm run build"
@@ -24,6 +23,11 @@
     "url": "https://github.com/mojilla/material-snackbar-supplier/issues"
   },
   "homepage": "https://github.com/mojilla/material-snackbar-supplier#readme",
+  "peerDependencies": {
+    "@material-ui/core": "^3.0.1",
+    "@material-ui/icons": "^3.0.1",
+    "react": "^16.4.2"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",

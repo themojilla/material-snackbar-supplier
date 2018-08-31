@@ -34,7 +34,7 @@ class App {
   }
 }
 
-export default withSnackbar()(App)
+export default withSnackBar(App)
 ```
 
 ## License
