@@ -3,14 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {withStyles} from '@material-ui/core/styles';
-
+import NoSsr from '@material-ui/core/NoSsr';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
-
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import green from '@material-ui/core/colors/green';
 import amber from '@material-ui/core/colors/amber';
+
 
 
 const styles = theme => ({
@@ -98,36 +98,38 @@ class SnackBarSupplier extends React.Component {
       <SnackBarContext.Provider value={this.getChildrenContext()}>
         {this.props.children}
 
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left'
-          }}
-          open={open}
-          onClose={this.handleClose}
-          {...settings}
-        >
-          <SnackbarContent
-            className={classes[variant]}
-            aria-describedby="message-snackbar"
-            message={
-              <span className={classes.message}>
+        <NoSsr>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left'
+            }}
+            open={open}
+            onClose={this.handleClose}
+            {...settings}
+          >
+            <SnackbarContent
+              className={classes[variant]}
+              aria-describedby="message-snackbar"
+              message={
+                <span className={classes.message}>
                 {message}
               </span>
-            }
-            action={[
-              <IconButton
-                key="close"
-                aria-label="Close"
-                color="inherit"
-                className={classes.close}
-                onClick={this.handleClose}
-              >
-                <CloseIcon className={classes.icon}/>
-              </IconButton>
-            ]}
-          />
-        </Snackbar>
+              }
+              action={[
+                <IconButton
+                  key="close"
+                  aria-label="Close"
+                  color="inherit"
+                  className={classes.close}
+                  onClick={this.handleClose}
+                >
+                  <CloseIcon className={classes.icon}/>
+                </IconButton>
+              ]}
+            />
+          </Snackbar>
+        </NoSsr>
       </SnackBarContext.Provider>
     )
   }
