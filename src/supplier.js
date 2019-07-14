@@ -1,31 +1,31 @@
-import React from 'react';
-
+import React, { createContext, PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import {
+  withStyles,
+  NoSsr,
+  Snackbar,
+  SnackbarContent,
+  IconButton
+} from '@material-ui/core';
+import { Close as CloseIcon } from '@material-ui/icons';
+import { green, amber } from '@material-ui/core/colors';
 
-import {withStyles} from '@material-ui/core/styles';
-import NoSsr from '@material-ui/core/NoSsr';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import green from '@material-ui/core/colors/green';
-import amber from '@material-ui/core/colors/amber';
 
 
-
-const styles = theme => ({
+const styles = ({ spacing, palette }) => ({
   close: {
-    width: theme.spacing.unit * 4,
-    height: theme.spacing.unit * 4
+    width: spacing(4),
+    height: spacing(4),
+    padding: 0,
   },
   success: {
     backgroundColor: green[600],
   },
   error: {
-    backgroundColor: theme.palette.error.dark,
+    backgroundColor: palette.error.dark,
   },
   info: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: palette.primary.dark,
   },
   warning: {
     backgroundColor: amber[700],
@@ -35,7 +35,7 @@ const styles = theme => ({
   },
   iconVariant: {
     opacity: 0.9,
-    marginRight: theme.spacing.unit,
+    marginRight: spacing(1),
   },
   message: {
     display: 'flex',
@@ -43,66 +43,72 @@ const styles = theme => ({
   }
 });
 
-const SnackBarContext = React.createContext();
+const SnackBarContext = createContext();
 
-export const withSnackBar = (Component) => {
-  return class extends React.Component {
-    render() {
-      return (
-        <SnackBarContext.Consumer>
-          {({message}) => {
-            return <Component {...this.props} message={message}/>
-          }}
-        </SnackBarContext.Consumer>
-      )
-    }
-  }
-};
+export const withSnackBar = Component => props => (
+  <SnackBarContext.Consumer>
+    {({ message }) => {
+      return <Component {...props} message={message} />
+    }}
+  </SnackBarContext.Consumer>
+);
 
-class SnackBarSupplier extends React.Component {
+class SnackBarSupplier extends PureComponent {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+    settings: PropTypes.object,
+    classes: PropTypes.object.isRequired,
+    anchorOriginVertical: PropTypes.oneOf(['top', 'bottom']),
+    anchorOriginHorizontal: PropTypes.oneOf(['left', 'center', 'right']),
+  };
+
+  static defaultProps = {
+    settings: {},
+    anchorOriginVertical: 'bottom',
+    anchorOriginHorizontal: 'left',
+  };
+
   state = {
     open: false,
     message: '',
     variant: ''
   };
 
-  static propTypes = {
-    children: PropTypes.node,
-    settings: PropTypes.object,
-    classes: PropTypes.object.isRequired
-  };
+  handleComingMessage = (message, variant = 'info') =>
+    this.setState({
+      open: true,
+      message,
+      variant,
+    });
 
-  handleComingMessage = (message, variant = 'info') => {
-    this.setState({open: true, message, variant})
-  };
+  getChildrenContext = () => ({
+    message: this.handleComingMessage
+  });
 
-  getChildrenContext() {
-    return {
-      message: this.handleComingMessage
-    }
-  }
-
-  handleClose = () => {
-    this.setState({open: false});
-  };
+  handleClose = () => this.setState({open: false});
 
   render() {
     const {
+      open,
+      message,
+      variant
+    } = this.state;
+    const {
       classes,
-      settings
+      settings,
+      children,
+      anchorOriginVertical,
+      anchorOriginHorizontal,
     } = this.props;
-
-    const {open, message, variant} = this.state;
 
     return (
       <SnackBarContext.Provider value={this.getChildrenContext()}>
-        {this.props.children}
-
+        {children}
         <NoSsr>
           <Snackbar
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left'
+              vertical: anchorOriginVertical,
+              horizontal: anchorOriginHorizontal,
             }}
             open={open}
             onClose={this.handleClose}
@@ -113,8 +119,8 @@ class SnackBarSupplier extends React.Component {
               aria-describedby="message-snackbar"
               message={
                 <span className={classes.message}>
-                {message}
-              </span>
+                  {message}
+                </span>
               }
               action={[
                 <IconButton
