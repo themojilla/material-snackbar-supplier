@@ -23,7 +23,7 @@
     "url": "https://github.com/mojilla/material-snackbar-supplier/issues"
   },
   "homepage": "https://github.com/mojilla/material-snackbar-supplier#readme",
-  "dependencies": {
+  "peerDependencies": {
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
     "react": "^16.8.6"
