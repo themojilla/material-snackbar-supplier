@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
@@ -24,20 +24,16 @@
   },
   "homepage": "https://github.com/mojilla/material-snackbar-supplier#readme",
   "peerDependencies": {
-    "@material-ui/core": "^3.0.1",
-    "@material-ui/icons": "^3.0.1",
-    "react": "^16.4.2"
+    "@material-ui/core": "^4.2.0",
+    "@material-ui/icons": "^4.2.1",
+    "react": "^16.8.6"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "@material-ui/core": "^3.0.1",
-    "@material-ui/icons": "^3.0.1",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.2"
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "prop-types": "^15.6.2"
   }
 }
