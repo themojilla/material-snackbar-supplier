@@ -14,11 +14,11 @@ import { green, amber } from '@material-ui/core/colors';
 const { Consumer, Provider } = createContext(undefined);
 
 export const withSnackBar = Component => props => (
-  <SnackBarContext.Consumer>
-    {({ message }) => {
-      return <Component {...props} message={message} />
-    }}
-  </SnackBarContext.Consumer>
+  <Consumer>
+    {({ showSnackBar }) => (
+      <Component {...props} showSnackBar={showSnackBar} />
+    )}
+  </Consumer>
 );
 
 class SnackBarSupplier extends PureComponent {
