@@ -42,7 +42,7 @@ class SnackBarSupplier extends PureComponent {
     variant: ''
   };
 
-  handleComingMessage = (message, variant = 'info') =>
+  handleComingMessage = ({ message, variant = 'info' }) =>
     this.setState({
       open: true,
       message,
@@ -50,7 +50,7 @@ class SnackBarSupplier extends PureComponent {
     });
 
   getChildrenContext = () => ({
-    message: this.handleComingMessage
+    showSnackBar: this.handleComingMessage
   });
 
   handleClose = () => this.setState({open: false});
