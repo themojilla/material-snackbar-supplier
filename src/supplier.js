@@ -141,4 +141,36 @@ class SnackBarSupplier extends PureComponent {
   }
 }
 
+const styles = ({ spacing, palette }) =>
+  createStyles({
+    close: {
+      width: spacing(4),
+      height: spacing(4),
+      padding: 0,
+    },
+    success: {
+      backgroundColor: green[600],
+    },
+    error: {
+      backgroundColor: palette.error.dark,
+    },
+    info: {
+      backgroundColor: palette.primary.dark,
+    },
+    warning: {
+      backgroundColor: amber[700],
+    },
+    icon: {
+      fontSize: 20,
+    },
+    iconVariant: {
+      opacity: 0.9,
+      marginRight: spacing(1),
+    },
+    message: {
+      display: 'flex',
+      alignItems: 'center',
+    }
+  });
+
 export default withStyles(styles)(SnackBarSupplier);
