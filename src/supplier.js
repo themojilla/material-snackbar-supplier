@@ -1,6 +1,7 @@
 import React, { createContext, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
+  createStyles,
   withStyles,
   NoSsr,
   Snackbar,
