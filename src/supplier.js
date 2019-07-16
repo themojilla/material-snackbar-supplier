@@ -92,6 +92,7 @@ class SnackBarSupplier extends PureComponent {
               }
               action={[
                 <IconButton
+                  component="span"
                   key="close"
                   aria-label="Close"
                   color="inherit"
