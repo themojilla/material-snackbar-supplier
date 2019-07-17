@@ -8,7 +8,7 @@ import {
   SnackbarContent,
   IconButton
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
+import CloseIcon from '@material-ui/icons/Close';
 import { green, amber } from '@material-ui/core/colors';
 
 const { Consumer, Provider } = createContext(undefined);
