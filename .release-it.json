@@ -1,9 +1,15 @@
 {
   "src": {
+    "commitMessage": "chore: release %s",
     "tagName": "v%s"
   },
-  "pkgFiles": ["package.json"],
   "requireUpstream": false,
   "beforeChangelogCommand": "auto-changelog",
-  "safeBump": false
+  "safeBump": false,
+  "github": {
+    "release": true
+  },
+  "npm": {
+    "publish": true
+  }
 }
