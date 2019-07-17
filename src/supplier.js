@@ -1,15 +1,14 @@
 import React, { createContext, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-  createStyles,
-  withStyles,
-  NoSsr,
-  Snackbar,
-  SnackbarContent,
-  IconButton
-} from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
-import { green, amber } from '@material-ui/core/colors';
+import withStyles from '@material-ui/core/styles/withStyles';
+import createStyles from '@material-ui/core/styles/createStyles';
+import NoSsr from '@material-ui/core/NoSsr';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import IconButton from '@material-ui/core/IconButton';
+import green from '@material-ui/core/colors/green';
+import amber from '@material-ui/core/colors/amber';
+import CloseIcon from '@material-ui/icons/Close';
 
 const { Consumer, Provider } = createContext(undefined);
 
@@ -140,6 +139,6 @@ const styles = ({ spacing, palette }) =>
       display: 'flex',
       alignItems: 'center',
     }
-  });
+});
 
 export default withStyles(styles)(SnackBarSupplier);
